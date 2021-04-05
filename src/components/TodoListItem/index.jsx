@@ -5,7 +5,7 @@ import {
 } from 'mdc-react';
 
 
-export default function TodoList({todo, onStatusChange: onCompleteChange}) {
+export default function TodoListItem({todo, onStatusChange: onCompleteChange}) {
     return (
         <ListItem>
             <ListItemGraphic>

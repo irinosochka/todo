@@ -6,6 +6,8 @@ import {
     ListGroup
 } from 'mdc-react';
 
+import './index.scss'
+
 export default function AppDrawer({ lists }) {
     return (
         <Drawer
