@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-    TextField, List, ListItem,
+    List, ListItem,
+    TextField
 } from 'mdc-react';
 
-import './index.scss'
+import './index.scss';
 
 export default function TodoForm({ onSubmit }) {
     const [title, setTitle] = useState('');
@@ -20,7 +21,7 @@ export default function TodoForm({ onSubmit }) {
             <List>
                 <ListItem>
                     <TextField
-                        label="Podaj..."
+                        label="  "
                         value={title}
                         onChange={setTitle}
                         fullWidth

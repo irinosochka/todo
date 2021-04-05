@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
-    List, Typography,
+    List
 } from 'mdc-react';
 
-import TodoListItem from '../TodoListItem'
-import './index.scss'
+import TodoListItem from '../TodoListItem';
+
+import './index.scss';
 
 
 export default function TodoList({ list, todos }) {

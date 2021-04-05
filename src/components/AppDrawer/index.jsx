@@ -6,7 +6,6 @@ import {
     ListGroup
 } from 'mdc-react';
 
-import './index.scss'
 
 export default function AppDrawer({ lists }) {
     return (
@@ -21,7 +20,7 @@ export default function AppDrawer({ lists }) {
                 <ListGroup>
                     <List>
                         {[
-                            { title: 'Moje konto', icon: 'person', to: '/' },
+                            { title: 'Moje konto', icon: 'person', to: '/', exact: true },
                             { title: 'Zadania', icon: 'assignment', to: '/tasks' },
                             { title: 'Ważne', icon: 'grade', to: '/important'},
                             { title: 'Nadchodzące', icon: 'alarm', to: '/planned'},
@@ -31,6 +30,8 @@ export default function AppDrawer({ lists }) {
                                 key={item.icon}
                                 component={NavLink}
                                 to={item.to}
+                                exact={item.exact}
+                                activeClassName="mdc-list-item--activated"
                             >
                                 <ListItemGraphic>
                                     <Icon>{item.icon}</Icon>
@@ -48,9 +49,10 @@ export default function AppDrawer({ lists }) {
                     <List>
                         {lists.map(item =>
                             <ListItem
-                                key={item.key}
+                                key={item.id}
                                 component={NavLink}
                                 to={item.id}
+                                activeClassName="mdc-list-item--activated"
                             >
                                 <ListItemGraphic>
                                     <Icon>list</Icon>
@@ -64,7 +66,6 @@ export default function AppDrawer({ lists }) {
                     </List>
                 </ListGroup>
             </DrawerContent>
-
         </Drawer>
     );
 }
