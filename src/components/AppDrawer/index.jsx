@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import {
     Drawer, DrawerHeader, DrawerContent,Icon,
     List, ListItem, ListItemGraphic, ListItemText, ListDivider,
@@ -6,7 +7,6 @@ import {
 } from 'mdc-react';
 
 export default function AppDrawer({ lists }) {
-    console.log(lists)
     return (
         <Drawer
             id="app-drawer"
@@ -25,7 +25,11 @@ export default function AppDrawer({ lists }) {
                             { title: 'Nadchodzące', icon: 'alarm', to: '/planned'},
                             { title: 'Wykonane', icon: 'done', to: '/done'},
                         ].map(item =>
-                            <ListItem key={item.icon}>
+                            <ListItem
+                                key={item.icon}
+                                component={NavLink}
+                                to={item.to}
+                            >
                                 <ListItemGraphic>
                                     <Icon>{item.icon}</Icon>
                                 </ListItemGraphic>
@@ -41,7 +45,11 @@ export default function AppDrawer({ lists }) {
 
                     <List>
                         {lists.map(item =>
-                            <ListItem key={item.key}>
+                            <ListItem
+                                key={item.key}
+                                component={NavLink}
+                                to={item.id}
+                            >
                                 <ListItemGraphic>
                                     <Icon>list</Icon>
                                 </ListItemGraphic>
