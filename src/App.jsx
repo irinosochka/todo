@@ -27,7 +27,7 @@ export default function App() {
 
             <AppContent>
                 <Switch>
-                    <Route path="/:listId" component={TodoList} />
+                    <Route exact path="/:listId" component={TodoList} />
                 </Switch>
             </AppContent>
         </div>

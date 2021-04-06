@@ -1,15 +1,18 @@
 import React from 'react';
 import {
     Checkbox,
-    Icon,
-    IconButton,
-    ListItem, ListItemGraphic, ListItemText, ListItemMeta
+     ListItemGraphic, ListItemText, ListItemMeta
 } from 'mdc-react';
+
+import {
+     ListItem, Icon, IconButton
+} from '@material-ui/core';
+
 
 import './index.scss';
 
 
-export default function TodoListItem({todo, onStatusChange: onCompleteChange}) {
+export default function TodoListItem({todo, onStatusChange, onDelete}) {
 
 
     return (
@@ -17,13 +20,22 @@ export default function TodoListItem({todo, onStatusChange: onCompleteChange}) {
             <ListItemGraphic>
                 <Checkbox
                     checked={todo.completed}
-                    onChange={onCompleteChange}
+                    onChange={onStatusChange}
                 />
             </ListItemGraphic>
 
             <ListItemText>
                 {todo.title}
             </ListItemText>
+
+            <ListItemMeta>
+                <IconButton>
+                    <Icon>edit</Icon>
+                </IconButton>
+                <IconButton onClick={() => onDelete(todo.id) }>
+                    <Icon>delete</Icon>
+                </IconButton>
+            </ListItemMeta>
         </ListItem>
     )
 }

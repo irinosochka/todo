@@ -8,7 +8,7 @@ import TodoListItem from '../TodoListItem';
 import './index.scss';
 
 
-export default function TodoList({ list, todos }) {
+export default function TodoList({ list, todos, onDelete}) {
 
     return (
         <div className="todo-list">
@@ -22,6 +22,7 @@ export default function TodoList({ list, todos }) {
                     <TodoListItem
                         key={todo.id}
                         todo={todo}
+                        onDelete={onDelete}
                     />
                 )}
             </List>

@@ -8,8 +8,10 @@ export function getLists() {
                 id: doc.id,
                 ...doc.data()
             }));
-
             return items;
+        })
+        .catch(error => {
+            console.log("Error getting documents: ", error);
         });
 }
 
@@ -38,6 +40,9 @@ export function getListTodos(listId) {
             }));
 
             return items;
+        })
+        .catch(error => {
+            console.log("Error getting documents: ", error);
         });
 }
 
@@ -46,8 +51,7 @@ export function createTodo(data) {
     return db.collection('todos').add({
         ...data,
         completed: false
-    })
-        .then(docRef => docRef.get())
+    }).then(docRef => docRef.get())
         .then(doc => ({
             id: doc.id,
             ...doc.data()
