@@ -12,7 +12,11 @@ import {
 import './index.scss';
 
 
-export default function TodoListItem({todo, onStatusChange, onDelete}) {
+export default function TodoListItem({todo, onDelete, onUpdate}) {
+
+    function handleChange(completed) {
+        onUpdate(todo.id, { completed });
+    }
 
 
     return (
@@ -20,7 +24,7 @@ export default function TodoListItem({todo, onStatusChange, onDelete}) {
             <ListItemGraphic>
                 <Checkbox
                     checked={todo.completed}
-                    onChange={onStatusChange}
+                    onChange={handleChange}
                 />
             </ListItemGraphic>
 

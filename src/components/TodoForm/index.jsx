@@ -6,11 +6,19 @@ import {
 
 import './index.scss';
 
-export default function TodoForm() {
+export default function TodoForm({onSubmit}) {
     const [title, setTitle] = useState('');
 
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        onSubmit(title);
+        setTitle('');
+    }
+
+
     return (
-        <form className="todo-form">
+        <form onSubmit={handleSubmit} className="todo-form">
             <List>
                 <ListItem>
                     <TextField
