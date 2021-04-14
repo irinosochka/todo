@@ -12,7 +12,7 @@ import {
 import './index.scss';
 
 
-export default function TodoListItem({todo, onDelete, onUpdate}) {
+export default function TodoListItem({todo, onDelete, onUpdate, onSelect }) {
 
     function handleChange(completed) {
         onUpdate(todo.id, { completed });
@@ -28,7 +28,7 @@ export default function TodoListItem({todo, onDelete, onUpdate}) {
                 />
             </ListItemGraphic>
 
-            <ListItemText>
+            <ListItemText onClick={() => onSelect(todo)}>
                 {todo.title}
             </ListItemText>
 

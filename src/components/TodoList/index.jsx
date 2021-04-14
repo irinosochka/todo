@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    List
+    List, Typography
 } from 'mdc-react';
 
 import TodoListItem from '../TodoListItem';
@@ -8,14 +8,14 @@ import TodoListItem from '../TodoListItem';
 import './index.scss';
 
 
-export default function TodoList({list, todos, onDelete, onUpdate}) {
+export default function TodoList({list, todos, onDelete, onUpdate, onSelect}) {
 
     return (
         <div className="todo-list">
-            <mdc-typography
+            <Typography
                 className="todo-list__title"
                 variant="headline4">{list.title}
-            </mdc-typography>
+            </Typography>
 
             <List className="todo-list__items">
                 {todos.map(todo =>
@@ -24,6 +24,7 @@ export default function TodoList({list, todos, onDelete, onUpdate}) {
                         todo={todo}
                         onUpdate={onUpdate}
                         onDelete={onDelete}
+                        onSelect={onSelect}
                     />
                 )}
             </List>
