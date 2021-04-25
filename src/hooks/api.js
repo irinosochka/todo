@@ -1,17 +1,17 @@
 import * as api from '../api'
-import {useEffect, useState} from 'react';
+import { useState, useMemo } from 'react';
+
 
 export default function useApi() {
-    const [lists, setLists] = useState([]);
-    const [todos, setTodos] = useState([]);
-
-    useEffect(() => {
-        api.getLists().then(setLists);
-    }, []);
 
     function getLists() {
        return api.getLists()
            .then(setLists);
+    }
+
+    function getTodos() {
+        return api.getTodos()
+            .then(setTodos);
     }
 
     function getListTodos(listId) {
@@ -40,19 +40,21 @@ export default function useApi() {
             });
     }
 
-
+    const actions = useMemo(() => ({
+        getLists,
+        getTodos,
+        getListTodos,
+        createTodo,
+        updateTodo,
+        deleteTodo
+    }), []);
 
     return {
         data: {
             lists,
             todos
         },
-        actions: {
-            getLists,
-            getListTodos,
-            createTodo,
-            updateTodo,
-            deleteTodo
-        }
+
+        actions
     };
 }

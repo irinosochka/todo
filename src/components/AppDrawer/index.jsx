@@ -24,7 +24,7 @@ export default function AppDrawer({ lists }) {
                             { title: 'Zadania', icon: 'assignment', to: '/tasks' },
                             { title: 'Ważne', icon: 'grade', to: '/important'},
                             { title: 'Nadchodzące', icon: 'alarm', to: '/planned'},
-                            { title: 'Wykonane', icon: 'done', to: '/done'},
+                            // { title: 'Wykonane', icon: 'done', to: '/done'},
                         ].map(item =>
                             <ListItem
                                 key={item.icon}
