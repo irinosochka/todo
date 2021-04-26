@@ -1,5 +1,6 @@
-import { db, auth } from "./firebase";
+import { db, auth } from './firebase';
 
+/* Auth */
 export function logInUser(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
 }
@@ -16,6 +17,8 @@ export function initAuth(onAuth) {
     auth.onAuthStateChanged(onAuth);
 }
 
+
+/* DB */
 export function getLists() {
     return db.collection('lists')
         .get()
@@ -24,9 +27,9 @@ export function getLists() {
                 id: doc.id,
                 ...doc.data()
             }));
-
+            
             return items;
-        });
+        });        
 }
 
 export function getTodos() {
@@ -38,7 +41,7 @@ export function getTodos() {
                 id: doc.id,
                 ...doc.data()
             }));
-
+            
             return items;
         });
 }
@@ -52,9 +55,9 @@ export function getListTodos(listId) {
                 id: doc.id,
                 ...doc.data()
             }));
-
+            
             return items;
-        });
+        });          
 }
 
 export function createTodo(data) {
@@ -71,17 +74,13 @@ export function createTodo(data) {
 
 export function updateTodo(todoId, data) {
     return db.collection('todos').doc(todoId).update(data)
-        .then(() => ({
-            id: todoId,
-            ...data
-        }));
+    .then(() => ({
+        id: todoId,
+        ...data
+    }));
 }
 
 export function deleteTodo(todoId) {
     return db.collection('todos').doc(todoId).delete()
         .then(() => todoId);
-}
-
-export function onAuth(handleAuth) {
-    auth.onAuthStateChanged(handleAuth);
 }

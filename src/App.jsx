@@ -1,49 +1,43 @@
-import React, {useContext, useEffect, useMemo, useReducer} from "react";
-import { Switch, Route } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import DataContext from './context/data';
-import { reducer, initialState, actions} from "./store";
+import useStore from './hooks/store';
 
-import AppDrawer from "./components/AppDrawer";
-import AppContent from "./components/AppContent";
-import TodoList from "./pages/TodoList";
-import LoginPage from "./pages/Login";
+import AppDrawer from './components/AppDrawer';
+import AppContent from './components/AppContent';
+import ListPage from './pages/List';
+import AuthPage from './pages/Auth';
 
 import './App.scss';
 
 export default function App() {
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    const contextValue = useMemo(() => {
-        return {state, dispatch };
-    }, [state, dispatch]);
+    const { state, actions } = useStore();
 
     useEffect(() => {
-        actions.getLists(dispatch);
-        actions.setAuth(dispatch);
+        actions.initAuth();
+        actions.getLists();
     }, []);
 
-
-
-  return (
-      <DataContext.Provider value={contextValue}>
-          <div className="app">
-              <AppDrawer
-                  lists={state.lists}
-              />
-
-              <AppContent>
-                  <Switch>
-                      <Route exact path="/" component={LoginPage} />
-                      <Route exact path="/tasks" component={TodoList} />
-                      <Route exact path="/important" render={TodoList} />
-                      <Route exact path="/planned" component={TodoList} />
-                      <Route exact path="/:listId/:todoId?" component={TodoList} />
-                  </Switch>
-              </AppContent>
-          </div>
-      </DataContext.Provider>
-  );
+    if (!state.user) {
+        return (
+            <Route component={AuthPage} />
+        );
+    } else {
+        return (
+            <div className="app">
+                <AppDrawer
+                    lists={state.lists}
+                />
+    
+                <AppContent>
+                    <Switch>
+                        <Route exact path="/" component={ListPage} />
+                        <Route exact path="/important" component={ListPage} />
+                        <Route exact path="/planned" component={ListPage} />
+                        <Route path="/:listId/:todoId?" component={ListPage} />
+                    </Switch>
+                </AppContent>
+            </div>
+        );
+    }
 }
-
-

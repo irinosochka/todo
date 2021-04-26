@@ -1,30 +1,47 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import {
-    Drawer, DrawerHeader, DrawerContent,Icon,
-    List, ListItem, ListItemGraphic, ListItemText, ListDivider,
-    ListGroup
+    Drawer, DrawerHeader, DrawerContent,
+    Layout,
+    ListItemGraphic, ListItemMeta,
+    ListDivider,
+    ListGroup,
 } from 'mdc-react';
 
+import {
+    Icon,
+    IconButton,
+    List, ListItem, ListItemText,
+    Typography
+} from '@material-ui/core';
+
+import useStore from '../../hooks/store';
 
 export default function AppDrawer({ lists }) {
+    const { state, actions } = useStore();
+
     return (
         <Drawer
             id="app-drawer"
         >
             <DrawerHeader
                 title="React Todo"
-            />
+            >
+                <Layout row justifyContent="between" alignItems="center">
+                    <Typography variant="body2">{state.user.email}</Typography>
+                    <IconButton onClick={() => actions.signOutUser()} title="Выйти">
+                        <Icon>exit_to_app</Icon>
+                    </IconButton>
+                </Layout>
+            </DrawerHeader>
 
             <DrawerContent>
                 <ListGroup>
                     <List>
                         {[
-                            { title: 'Moje konto', icon: 'person', to: '/', exact: true },
-                            { title: 'Zadania', icon: 'assignment', to: '/tasks' },
-                            { title: 'Ważne', icon: 'grade', to: '/important'},
-                            { title: 'Nadchodzące', icon: 'alarm', to: '/planned'},
-                            // { title: 'Wykonane', icon: 'done', to: '/done'},
+                            { title: 'Zadania', icon: 'home', to: '/', exact: true },
+                            { title: 'Ważne', icon: 'star', to: '/important' },
+                            { title: 'Zaplanowane', icon: 'event', to: '/planned' },
                         ].map(item =>
                             <ListItem
                                 key={item.icon}
@@ -43,7 +60,7 @@ export default function AppDrawer({ lists }) {
                             </ListItem>
                         )}
                     </List>
-
+                    
                     <ListDivider element="hr" />
 
                     <List>
@@ -61,6 +78,10 @@ export default function AppDrawer({ lists }) {
                                 <ListItemText>
                                     {item.title}
                                 </ListItemText>
+
+                                <ListItemMeta>
+                                    {item.todos.length}
+                                </ListItemMeta>
                             </ListItem>
                         )}
                     </List>

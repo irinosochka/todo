@@ -2,7 +2,7 @@ export function bindActions(actions, dispatch) {
     return Object.entries(actions).reduce((result, [key, fn]) => {
         result[key] = (...args) => {
             const action = fn(...args);
-
+            
             if (typeof action.then === 'function') {
                 action.then(dispatch);
             } else if (typeof action === 'function') {

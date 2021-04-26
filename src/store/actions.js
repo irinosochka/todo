@@ -1,6 +1,33 @@
 import * as api from '../api';
 
+/* Auth */
+export function logInUser(email, password) {
+    return api.logInUser(email, password).then(() => ({}));
+}
 
+export function signOutUser() {
+    return api.signOutUser().then(() => ({}));
+}
+
+export function registerUser(email, password) {
+    return api.registerUser(email, password).then(() => ({}));
+}
+
+export function initAuth() {
+    return dispatch => api.initAuth(user => {
+        return user ? dispatch({
+            type: 'LOGIN_USER',
+            payload: {
+                user
+            }
+        }) : dispatch({
+            type: 'LOGOUT_USER'
+        });
+    });
+}
+
+
+/* DB */
 export function getLists() {
     return api.getLists()
         .then(lists => ({

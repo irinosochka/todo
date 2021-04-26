@@ -6,7 +6,7 @@ import {
 
 import './index.scss';
 
-export default function TodoForm({onSubmit}) {
+export default function TodoForm({ onSubmit }) {
     const [title, setTitle] = useState('');
 
     function handleSubmit(event) {
@@ -16,13 +16,12 @@ export default function TodoForm({onSubmit}) {
         setTitle('');
     }
 
-
     return (
         <form onSubmit={handleSubmit} className="todo-form">
             <List>
                 <ListItem>
                     <TextField
-                        label="Dodaj nowe zadanie..."
+                        label="Co jest do zrobienia..."
                         value={title}
                         onChange={(event) => setTitle(event.target.value)}
                         fullWidth
