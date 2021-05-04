@@ -9,6 +9,7 @@ import {
 } from 'mdc-react';
 
 import {
+    Grid,
     Icon,
     IconButton,
     List, ListItem, ListItemText,

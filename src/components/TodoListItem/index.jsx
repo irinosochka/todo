@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-    Checkbox,ListItemGraphic, ListItemMeta
+    ListItemGraphic, ListItemMeta
 } from 'mdc-react';
 
 import {
+    Checkbox,
     Icon,
     IconButton,
     ListItem, ListItemText,
@@ -18,13 +19,13 @@ export default function TodoListItem({
     onSelect
 }) {
     function handleChange(completed) {
-        onUpdate(todo.id, { completed });
+        onUpdate(todo.id, { completed: !todo.completed });
     }
 
     return (
         <ListItem className="todo-list-item">
             <ListItemGraphic>
-                <Checkbox
+                <Checkbox color="primary"
                     checked={todo.completed}
                     onChange={handleChange}
                 />
@@ -33,6 +34,11 @@ export default function TodoListItem({
             <ListItemText onClick={() => onSelect(todo)}>{todo.title}</ListItemText>
 
             <ListItemMeta>
+                <IconButton onClick={() => onUpdate(todo.id, {important: !todo.important})}>
+                    <Icon>{todo.important ? 'star' : 'star_bordered' }</Icon>
+                </IconButton>
+
+
                 <IconButton onClick={() => onDelete(todo.id)}>
                     <Icon>delete</Icon>
                 </IconButton>

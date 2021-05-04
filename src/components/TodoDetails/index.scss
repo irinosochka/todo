@@ -1,4 +1,14 @@
 .todo-details {
+    .MuiTextField-root{
+        + .MuiTextField-root {
+            margin-top: 0.5rem;
+        }
+    }
+    .MuiListItem-gutters{
+        padding-left: 0px;
+    }
+
+
     .todo-steps {
         margin: 1rem 0;
         
@@ -11,5 +21,6 @@
                 }
             }
         }
+
     }
 }

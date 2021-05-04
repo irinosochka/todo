@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Layout,
     SideSheet,
     TopAppBar,
-    Icon,  Typography,
-    IconButton,
+    Icon, Typography,
+
 } from 'mdc-react';
 
 import {
-    LinearProgress,
+    LinearProgress, Grid, IconButton
 } from '@material-ui/core';
 
 import useStore from "../../hooks/store";
@@ -23,20 +22,11 @@ export default function ListPage({ match }) {
     const { state, actions } = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
 
-    useEffect(() => {
-        setSelectedTodo(null);
-        
-        if (match.params.listId) {
-            actions.getListTodos(match.params.listId);
-        } else {
-            actions.getTodos();
-        }
-    }, [actions, match.params.listId]);
-
     function handleSubmit(title) {
         actions.createTodo({
             title,
-            listId: list.id
+            userId: state.user.uid,
+            listId: list.id || ''
         });
     }
 
@@ -52,41 +42,54 @@ export default function ListPage({ match }) {
         setSelectedTodo(todo);
     }
 
-    const list = state.lists.find(list => list.id === match.params.listId);
+    const list = state.lists.find(list => list.id === match.params.listId) || { title: "Zadania"};
+    const path = match.path;
 
-    if (!list || !state.todos) return <LinearProgress />;
+    const getTodosByFilter = ({
+        '/': todos => todos,
+        '/important': todos => todos.filter(todo => todo.important),
+        '/planned': todos => todos.filter(todo => todo.dueDate)
+    });
+
+    const getTodosByList = (listId, todos) => todos.filter(todo => todo.listId === listId);
+
+    const todos = match.params.listId ? getTodosByList(match.params.listId, state.todos) : getTodosByFilter[path](state.todos);
+
+    if (!list || !todos) return <LinearProgress />;
 
     return (
-        <Layout id="list-page" className="page">
+        <Grid id="list-page" className="page">
             <TopAppBar
                 title={list.title}
             />
 
-            <Layout row>
+            <Grid row>
                 <SideSheet
                     open={selectedTodo}
                     dismissible
                     appContentSelector=".mdc-side-sheet-app-content"
                 >
-                    <Layout row justifyContent="between" >
+                    <Grid container spacing={1}>
                         <Typography nomargin>Szczegówy zadania</Typography>
 
                         <IconButton onClick={() => setSelectedTodo(null)}>
                             <Icon>close</Icon>
                         </IconButton>
-                    </Layout>
+                    </Grid>
 
+                    <Grid row >
                     {selectedTodo &&
                         <TodoDetails
                             todo={selectedTodo}
                         />
                     }
+                    </Grid>
                 </SideSheet>
 
-                <Layout column className="mdc-side-sheet-app-content">
+                <Grid column className="mdc-side-sheet-app-content">
                     <TodoList
                         list={list}
-                        todos={state.todos}
+                        todos={todos}
                         onSelect={handleSelect}
                         onUpdate={handleUpdate}
                         onDelete={handleDelete}
@@ -95,8 +98,8 @@ export default function ListPage({ match }) {
                     <TodoForm
                         onSubmit={handleSubmit}
                     />
-                </Layout>
-            </Layout>
-        </Layout>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 }

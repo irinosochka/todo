@@ -15,8 +15,14 @@ export default function App() {
 
     useEffect(() => {
         actions.initAuth();
-        actions.getLists();
-    }, []);
+    }, [actions]);
+
+    useEffect(() => {
+        if(state.user){
+            actions.getLists(state.user.uid);
+            actions.getTodos(state.user.uid);
+        }
+    }, [state.user, actions]);
 
     if (!state.user) {
         return (

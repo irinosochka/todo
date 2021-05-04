@@ -38,7 +38,7 @@ export default function AuthPage() {
 
         return(
     <Layout id="login-page" className="page">
-        <Typography variant="headline1">React Todo</Typography>
+        <Typography>React Todo</Typography>
 
         {error &&
         <Typography>{error}</Typography>
