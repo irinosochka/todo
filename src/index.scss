@@ -14,3 +14,29 @@ body {
     display: flex;
     min-height: 100vh;
 }
+
+.mdc-top-app-bar{
+    background-color: #3f51b5;
+}
+
+.mdc-drawer{
+    .mdc-list-item--activated{
+        color: #ffa100;
+        .mdc-list-item__graphic
+        {
+            color: #ffa100;
+        }
+    }
+}
+
+.mdc-button__label{
+    color: #3f51b5;
+}
+
+.mdc-button__icon{
+    color: #3f51b5;
+}
+
+:any-link {
+    color: #3f51b5;
+}

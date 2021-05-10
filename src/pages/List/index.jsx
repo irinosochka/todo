@@ -87,7 +87,7 @@ export default function ListPage({ match }) {
                 <SideSheet
                     open={selectedTodo}
                     dismissible
-                    appContentSelector=".mdc-side-sheet-app-content"
+                    //appContentSelector=".mdc-side-sheet-app-content"
                 >
                     <Grid container spacing={1}>
                         <Typography>Szczegówy zadania</Typography>

@@ -129,7 +129,7 @@ export default function AppDrawer({ lists, list }) {
                                     onChange={(event) => setListTitle(event.target.value)}
                                     fullWidth
 
-                                /> :
+                                />
                             </form>
                             :
                             <Button
