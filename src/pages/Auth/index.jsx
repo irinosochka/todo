@@ -44,7 +44,7 @@ export default function AuthPage() {
         <Typography>{error}</Typography>
         }
 
-        <Card outlined>
+        <Card variant="outlined">
             <CardSection primary>
                 <TextField
                     type="email"

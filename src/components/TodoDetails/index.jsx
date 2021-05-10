@@ -16,28 +16,28 @@ import './index.scss';
 
 export default function TodoDetails({ todo }) {
 
-    console.log(todo.dueDate)
-
     return (
         <aside className="todo-details">
-            <Layout column>
-                <TextField id="filled-basic" label="Filled" variant="filled"
+            <Layout varian="column">
+                <TextField
+                    variant="filled"
                     label="Nazwa"
                     value={todo.title}
                     onChange={() => {}}
                 />
 
                 {todo.dueDate &&
-                    <TextField id="filled-basic" label="Filled" variant="filled"
-                               label="Data wykonania"
-                               value={moment(todo.dueDate  * 1000).format("DD/MM/YYYY")}
-                               onChange={() => {}}
+                    <TextField
+                        variant="filled"
+                        label="Data wykonania"
+                        value={moment(todo.dueDate * 1000).format("MM/DD")}
+                        onChange={() => {}}
                     />
                 }
             </Layout>
 
             <section className="todo-steps">
-                <Typography variant="subtitle2" nomargin>Kroki</Typography>
+                <Typography variant="subtitle2">Kroki</Typography>
 
                 {todo.steps && todo.steps.length > 0 &&
                     <List className="todo-step-list" dense>
@@ -58,7 +58,7 @@ export default function TodoDetails({ todo }) {
                 <TextField
                     id="standard-helperText"
                     type="datetime-local"
-                    value={moment(todo.dueDate  * 1000 /39 ).format("DD/MM/YYYY")}
+                    value={moment(todo.dueDate * 1000).format("MM/DD")}
                     onChange={() => {}}
                     fullWidth
                 />
