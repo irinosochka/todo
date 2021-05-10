@@ -72,8 +72,8 @@ export default function AppDrawer({ lists, list }) {
                     <List>
                         {[
                             { title: 'Wszystkie zadania', icon: 'home', to: '/', exact: true },
-                            { title: 'Wykonane', icon: 'done', to: '/done' },
-                            { title: 'Nie wykonane', icon: 'close', to: '/not_done' },
+                            { title: 'Ukończone', icon: 'done', to: '/done' },
+                            { title: 'W trakcie wykonania', icon: 'close', to: '/not_done' },
                             { title: 'Zaplanowane', icon: 'event', to: '/planned' },
                             { title: 'Ważne', icon: 'star', to: '/important' },
                         ].map(item =>
@@ -113,12 +113,9 @@ export default function AppDrawer({ lists, list }) {
                                     {item.title}
                                 </ListItemText>
 
-                                <ListItemMeta>
-                                    {item.todos.length}
-                                    <IconButton onClick={() => handleDeleteList(list.id)}>
-                                        <Icon>delete</Icon>
-                                    </IconButton>
-                                </ListItemMeta>
+                                <IconButton onClick={() => handleDeleteList(item.id)}>
+                                    <Icon>delete</Icon>
+                                </IconButton>
 
                             </ListItem>
                         )}

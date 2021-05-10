@@ -9,7 +9,6 @@ export function bindActions(actions, dispatch) {
             } else if (action.type) {
                 dispatch(action);
             }
-
             return action;
         };
 

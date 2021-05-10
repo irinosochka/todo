@@ -20,6 +20,7 @@ import './index.scss';
 export default function ListPage({ match }) {
     const { state, actions } = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
+    const [sortBy, setSortBy] = useState('');
 
     function handleSubmit(title) {
         actions.createTodo({
@@ -42,7 +43,9 @@ export default function ListPage({ match }) {
     }
 
     function handleSortChange(sort) {
-        actions.updateList(list.id, {sort});
+        if(list.id)
+            actions.updateList(list.id, {sort});
+        setSortBy(sort);
     }
 
     const sortFn = {
@@ -53,7 +56,7 @@ export default function ListPage({ match }) {
     }
 
     const list = state.lists.find(list => list.id === match.params.listId) || { title: "Zadania"};
-    const path = match.path;
+
 
     const getTodosByFilter = ({
         '/': todos => todos,
@@ -65,13 +68,12 @@ export default function ListPage({ match }) {
 
     const getTodosByList = (listId, todos) => todos.filter(todo => todo.listId === listId);
 
-    const todos = match.params.listId ?
-        getTodosByList(match.params.listId, state.todos) :
-        getTodosByFilter[path](state.todos);
+    const todos = match.params.listId ? getTodosByList(match.params.listId, state.todos) : getTodosByFilter[match.path](state.todos);
 
-    const sortedTodos = list.sort ? todos.slice().sort(sortFn[list.sort]) : todos;
+    const sortedTodos = sortBy ? todos.slice().sort(sortFn[sortBy]) : todos;
 
-    if (!list || !todos) return <LinearProgress />;
+
+    if (!list || !state.todos) return <LinearProgress />;
 
     return (
         <Grid id="list-page" className="page">

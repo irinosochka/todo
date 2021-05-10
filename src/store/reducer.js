@@ -84,6 +84,21 @@ export default function reducer(state, action) {
                 todos: state.todos.filter(todo => todo.id !== action.payload.todoId)
             }
 
+        case 'CREATE_STEP':
+            return {
+                ...state,
+                todos: state.todos.map(todo => {
+                    if (todo.id === action.payload.todo.id) {
+                        return {
+                            ...todo,
+                            ...action.payload.todo
+                        }
+                    }
+
+                    return todo
+                })
+            };
+
         default:
             return state;
     }

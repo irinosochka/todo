@@ -118,3 +118,13 @@ export function deleteTodo(todoId) {
             }
         }));
 }
+
+export function createStep(todoId, data) {
+    return api.createStep(todoId, data)
+        .then(todo => ({
+            type: 'CREATE_STEP',
+            payload: {
+                todo
+            }
+        }));
+}

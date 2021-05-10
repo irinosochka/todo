@@ -13,8 +13,15 @@ import {
 import moment from 'moment';
 
 import './index.scss';
+import useStore from "../../hooks/store";
+import TodoForm from "../TodoForm";
 
 export default function TodoDetails({ todo }) {
+    const { state, actions } = useStore();
+
+    function handleUpdateStep(todoId, data) {
+        actions.createStep(todoId, data);
+    }
 
     return (
         <aside className="todo-details">
@@ -48,12 +55,15 @@ export default function TodoDetails({ todo }) {
                                         checked={step.completed}
                                     />
                                 </ListItemGraphic>
-
                                 <ListItemText>{step.title}</ListItemText>
                             </ListItem>
                         )}
                     </List>
                 }
+
+                <TodoForm
+                    onSubmit={handleUpdateStep}
+                />
 
                 <TextField
                     id="standard-helperText"
