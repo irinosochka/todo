@@ -16,22 +16,9 @@ import {
     Typography
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-
 import useStore from '../../hooks/store';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-}));
-
 export default function AppDrawer({ lists, list }) {
-    const classes = useStyles();
     const { state, actions } = useStore();
     const [ isListFormOpen, setListFormOpen] = useState(false);
     const [ listTitle, setListTitle] = useState('');
@@ -95,7 +82,7 @@ export default function AppDrawer({ lists, list }) {
                         )}
                     </List>
                     
-                    <ListDivider element="hr" />
+                    <ListDivider element="hr"/>
 
                     <List>
                         {lists.map(item =>
@@ -122,7 +109,7 @@ export default function AppDrawer({ lists, list }) {
                     </List>
                     <Grid>
                         {isListFormOpen ?
-                            <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                                 <TextField
                                     label="Nowa lista"
                                     value={listTitle}

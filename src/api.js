@@ -1,6 +1,4 @@
 import { db, auth } from './firebase';
-import FieldValue from 'firebase'
-import firebase from "firebase";
 
 /* Auth */
 export function logInUser(email, password) {
@@ -21,7 +19,6 @@ export function initAuth(onAuth) {
 
 
 /* DB */
-
 export function createList(data) {
     return db.collection('lists').add({
         icon: '',
@@ -72,7 +69,6 @@ export function createTodo(data) {
         completed: false,
         important:false,
         dueDate: null,
-        steps: [],
         listId: '',
         ...data
     }).then(docRef => docRef.get())
@@ -90,16 +86,6 @@ export function updateTodo(todoId, data) {
 export function deleteTodo(todoId) {
     return db.collection('todos').doc(todoId).delete()
         .then(() => todoId);
-}
-
-export function createStep(todoId, data) {
-    return db.collection('todos').doc(todoId).update({
-        id: todoId,
-        steps: [
-            'virgi'
-        ],
-        ...data
-    });
 }
 
 function mapSnapshot(snapshot) {

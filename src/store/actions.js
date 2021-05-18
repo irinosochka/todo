@@ -1,4 +1,5 @@
 import * as api from '../api';
+import firebase from "firebase";
 
 /* Auth */
 export function logInUser(email, password) {
@@ -25,7 +26,6 @@ export function initAuth() {
         });
     });
 }
-
 
 /* DB */
 
@@ -115,16 +115,6 @@ export function deleteTodo(todoId) {
             type: 'DELETE_TODO',
             payload: {
                 todoId
-            }
-        }));
-}
-
-export function createStep(todoId, data) {
-    return api.createStep(todoId, data)
-        .then(todo => ({
-            type: 'CREATE_STEP',
-            payload: {
-                todo
             }
         }));
 }

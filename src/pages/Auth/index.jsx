@@ -9,8 +9,6 @@ import {
 
 import { makeStyles } from '@material-ui/core/styles';
 import useStore from "../../hooks/store";
-import { createMuiTheme } from '@material-ui/core/styles';
-import { purple } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
