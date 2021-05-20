@@ -1,6 +1,6 @@
 import * as api from '../api';
 
-/* Auth */
+/* LoginPage */
 export function logInUser(email, password) {
     return api.logInUser(email, password).then(() => ({}));
 }

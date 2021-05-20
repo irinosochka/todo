@@ -5,8 +5,8 @@ import useStore from './hooks/store';
 
 import AppDrawer from './components/AppDrawer';
 import AppContent from './components/AppContent';
-import ListPage from './pages/List';
-import AuthPage from './pages/Auth';
+import TodoPage from './pages/TodoPage';
+import LoginPage from './pages/LoginPage';
 
 import './App.scss';
 
@@ -26,7 +26,7 @@ export default function App() {
 
     if (!state.user) {
         return (
-            <Route component={AuthPage} />
+            <Route component={LoginPage} />
         );
     } else {
         return (
@@ -37,12 +37,12 @@ export default function App() {
 
                     <AppContent>
                         <Switch>
-                            <Route exact path="/" component={ListPage} />
-                            <Route exact path="/important" component={ListPage} />
-                            <Route exact path="/planned" component={ListPage} />
-                            <Route exact path="/done" component={ListPage} />
-                            <Route exact path="/not_done" component={ListPage} />
-                            <Route path="/:listId/:todoId?" component={ListPage} />
+                            <Route exact path="/" component={TodoPage} />
+                            <Route exact path="/important" component={TodoPage} />
+                            <Route exact path="/planned" component={TodoPage} />
+                            <Route exact path="/done" component={TodoPage} />
+                            <Route exact path="/not_done" component={TodoPage} />
+                            <Route path="/:listId/:todoId?" component={TodoPage} />
                         </Switch>
                     </AppContent>
                 </div>

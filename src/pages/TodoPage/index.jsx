@@ -10,14 +10,14 @@ import {
 
 import useStore from "../../hooks/store";
 
-import FadeMenu from "../../components/PageHeader";
+import Header from "../../components/Header";
 import TodoList from '../../components/TodoList';
-import TodoForm from '../../components/TodoForm';
-import TodoDetails from '../../components/TodoDetails';
+import Form from '../../components/Form';
+import Details from '../../components/Details';
 
 import './index.scss';
 
-export default function ListPage({ match }) {
+export default function TodoPage({ match }) {
     const { state, actions } = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
     const [sortBy, setSortBy] = useState('');
@@ -77,7 +77,7 @@ export default function ListPage({ match }) {
 
     return (
         <Grid id="list-page" className="page">
-            <FadeMenu
+            <Header
                 title={list.title}
                 sortBy={list.sort}
                 onSortChange={handleSortChange}
@@ -99,7 +99,7 @@ export default function ListPage({ match }) {
 
                     <Grid variant="row">
                     {selectedTodo &&
-                        <TodoDetails
+                        <Details
                             todo={selectedTodo}
                             onUpdate={handleUpdate}
                         />
@@ -116,7 +116,7 @@ export default function ListPage({ match }) {
                         onDelete={handleDelete}
                     />
 
-                    <TodoForm
+                    <Form
                         onSubmit={handleSubmit}
                     />
                 </Grid>

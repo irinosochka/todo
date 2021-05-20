@@ -4,7 +4,7 @@ import{
     Menu,MenuItem, Fade, Icon, IconButton
 } from '@material-ui/core'
 
-export default function FadeMenu({  title, sortBy, onSortChange }) {
+export default function Header({  title, sortBy, onSortChange }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 

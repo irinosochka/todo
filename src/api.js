@@ -2,7 +2,7 @@ import { db, auth } from './firebase';
 import FieldValue from 'firebase'
 import firebase from "firebase";
 
-/* Auth */
+/* LoginPage */
 export function logInUser(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
 }

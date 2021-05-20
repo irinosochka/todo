@@ -13,7 +13,7 @@ import {
 import './index.scss';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function TodoDetails({ todo, onUpdate }) {
+export default function Details({ todo, onUpdate }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     function handleDateChange(date){

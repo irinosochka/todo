@@ -3,17 +3,17 @@ import firebase from "firebase";
 import "firebase/auth";
 
 import {
-    Button, CssBaseline, FormControlLabel,Checkbox,
+    Button, CssBaseline,
     Container,
     Typography,
-    TextField, Grid
+    TextField
 } from '@material-ui/core';
 
 import "./index.scss";
 
 import useStore from "../../hooks/store";
 
-export default function AuthPage() {
+export default function LoginPage() {
     const {actions} = useStore();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -6,7 +6,7 @@ import {
 
 import './index.scss';
 
-export default function TodoForm({ onSubmit }) {
+export default function Form({ onSubmit }) {
     const [title, setTitle] = useState('');
 
     function handleSubmit(event) {
