@@ -1,8 +1,14 @@
 import { db, auth } from './firebase';
+import FieldValue from 'firebase'
+import firebase from "firebase";
 
 /* Auth */
 export function logInUser(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
+}
+
+export function logInUserGoogle(provider) {
+    return auth.signInWithRedirect(provider);
 }
 
 export function signOutUser() {
@@ -19,11 +25,10 @@ export function initAuth(onAuth) {
 
 
 /* DB */
+
 export function createList(data) {
     return db.collection('lists').add({
-        icon: '',
         sort: '',
-        todos: [],
         ...data
     })
         .then(docRef => docRef.get())

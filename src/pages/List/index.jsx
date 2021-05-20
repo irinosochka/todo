@@ -10,7 +10,7 @@ import {
 
 import useStore from "../../hooks/store";
 
-import FadeMenu from "../../components/PageHeader/fade";
+import FadeMenu from "../../components/PageHeader";
 import TodoList from '../../components/TodoList';
 import TodoForm from '../../components/TodoForm';
 import TodoDetails from '../../components/TodoDetails';
@@ -50,7 +50,7 @@ export default function ListPage({ match }) {
 
     const sortFn = {
         title: (a,b) => a.title.localeCompare(b.title),
-        date: (a,b) => new Date(a.seconds * 1000) - new Date(b.seconds * 1000),
+        dueDate: (a,b) => b.dueDate - a.dueDate,
         important: (a,b) => b.important- a.important,
         completed: (a,b) =>b.completed - a.completed
     }
@@ -101,6 +101,7 @@ export default function ListPage({ match }) {
                     {selectedTodo &&
                         <TodoDetails
                             todo={selectedTodo}
+                            onUpdate={handleUpdate}
                         />
                     }
                     </Grid>

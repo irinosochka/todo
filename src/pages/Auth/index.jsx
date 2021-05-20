@@ -1,33 +1,19 @@
 import React, {useState} from 'react';
+import firebase from "firebase";
+import "firebase/auth";
 
 import {
     Button, CssBaseline, FormControlLabel,Checkbox,
     Container,
     Typography,
-    TextField
+    TextField, Grid
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
+import "./index.scss";
+
 import useStore from "../../hooks/store";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
-
 export default function AuthPage() {
-    const classes = useStyles();
     const {actions} = useStore();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -47,14 +33,23 @@ export default function AuthPage() {
         }
     }
 
+    function handleGoogle() {
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        if (provider) {
+            actions.logInUserGoogle(provider)
+                .catch(error => setError(error.message));
+        }
+    }
+
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h3" color="primary" >
+        <Container component="main">
+            <CssBaseline/>
+            <div className='paper'>
+                <Typography component="h1" variant="h3" color="primary">
                     React Todo
                 </Typography>
-                <form className={classes.form} noValidate>
+                <div className='forms'>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -76,19 +71,15 @@ export default function AuthPage() {
                         fullWidth
                         onChange={(event) => setPassword(event.target.value)}
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Zapamiętaj mnie"
-                    />
+
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
                         onClick={handleLogInButtonClick}
                     >
-                        Zaloguj
+                        Zaloguj się
                     </Button>
 
                     <Button
@@ -96,12 +87,23 @@ export default function AuthPage() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        onClick={handleGoogle}
+                        style={{marginTop:'10px'}}
+                    >
+                        Zaloguj się za pomocą Google
+                    </Button>
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
                         onClick={handleRegisterButtonClick}
+                        style={{marginTop:'10px'}}
                     >
                         Załóż konto
                     </Button>
-                </form>
+                </div>
             </div>
         </Container>
     );

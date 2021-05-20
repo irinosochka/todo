@@ -1,51 +1,45 @@
 import React, {useState} from 'react';
-import {
-    TopAppBar,Menu, MenuItem,MenuSurface,
-} from 'mdc-react';
+import {TopAppBar} from "mdc-react";
+import{
+    Menu,MenuItem, Fade, Icon, IconButton
+} from '@material-ui/core'
 
-import {
-     IconButton, Icon,
-} from '@material-ui/core';
+export default function FadeMenu({  title, sortBy, onSortChange }) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
 
-export default function PageHeader({  title, onSortChange }) {
-    const [menuAnchor, setMenuAnchor] = useState(null);
-    const[isMenuOpen, setMenuOpen] = useState(false);
-
-    const openMenu = event => {
-        setMenuOpen(true);
-        setMenuAnchor(event.target);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
 
-    const closeMenu = () => {
-        setMenuOpen(false);
-        setMenuAnchor(null);
+    const handleClose = () => {
+        setAnchorEl(null);
     };
 
-    return(
+    return (
         <div>
             <TopAppBar
                 title={title}
                 actionItems={[
-                    <IconButton onClick={openMenu}>
+                    <IconButton aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
                         <Icon>sort</Icon>
                     </IconButton>
                 ]}
             />
 
-            <MenuSurface
-                open={isMenuOpen}
-                anchor={menuAnchor}
-                onClose={closeMenu}
-                right
+            <Menu
+                id="fade-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
             >
-
-                <Menu>
-                    <MenuItem onClick={() => onSortChange('title')}>Po nazwie</MenuItem>
-                    <MenuItem onClick={() => onSortChange('date')}>Po dacie</MenuItem>
-                    <MenuItem onClick={() => onSortChange('completed')}>Po wykonanych</MenuItem>
-                    <MenuItem onClick={() => onSortChange('important')}>Po ważnych</MenuItem>
-                </Menu>
-            </MenuSurface>
-            </div>
+                <MenuItem onClick={() => onSortChange('title')} selected={sortBy === 'title'}>Po nazwie</MenuItem>
+                <MenuItem onClick={() => onSortChange('dueDate')} selected={sortBy === 'dueDate'}>Po dacie</MenuItem>
+                <MenuItem onClick={() => onSortChange('completed')} selected={sortBy === 'completed'}>Po wykonanych</MenuItem>
+                <MenuItem onClick={() => onSortChange('important')} selected={sortBy === 'important'}>Po ważnych</MenuItem>
+            </Menu>
+        </div>
     );
 }

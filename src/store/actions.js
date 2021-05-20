@@ -1,9 +1,12 @@
 import * as api from '../api';
-import firebase from "firebase";
 
 /* Auth */
 export function logInUser(email, password) {
     return api.logInUser(email, password).then(() => ({}));
+}
+
+export function logInUserGoogle(provider) {
+    return api.logInUserGoogle(provider).then(() => ({}));
 }
 
 export function signOutUser() {
@@ -26,6 +29,7 @@ export function initAuth() {
         });
     });
 }
+
 
 /* DB */
 
