@@ -15,13 +15,3 @@ export function bindActions(actions, dispatch) {
         return result;
     }, {});
 }
-
-export function combineReducers(reducers) {
-    return function(state, action) {
-        return Object.entries(reducers).reduce((newState, [key, reducer]) => {
-            newState[key] = reducer(state[key], action);
-
-            return newState;
-        }, {});
-    };
-}

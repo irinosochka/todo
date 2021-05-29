@@ -1,6 +1,4 @@
 import { db, auth } from './firebase';
-import FieldValue from 'firebase'
-import firebase from "firebase";
 
 /* LoginPage */
 export function logInUser(email, password) {
@@ -24,8 +22,7 @@ export function initAuth(onAuth) {
 }
 
 
-/* DB */
-
+/* TodoPage */
 export function createList(data) {
     return db.collection('lists').add({
         sort: '',

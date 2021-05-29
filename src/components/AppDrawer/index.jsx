@@ -1,20 +1,22 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import indigo from '@material-ui/core/colors/indigo';
 import {
-    Drawer, DrawerHeader, DrawerContent,
-    Layout,
-    ListItemGraphic, ListItemMeta,
+    DrawerHeader, DrawerContent,
+    ListItemGraphic,Drawer,
     ListDivider,
-    ListGroup,Button
+    ListGroup
 } from 'mdc-react';
 
 import {
     Grid, TextField,
-    Icon,
+    Icon, Button,
     IconButton,
     List, ListItem, ListItemText,
     Typography
 } from '@material-ui/core';
+
+import './index.scss'
 
 import useStore from '../../hooks/store';
 
@@ -41,17 +43,19 @@ export default function AppDrawer({ lists, list }) {
 
     return (
         <Drawer
+            variant="permanent"
+            anchor="left"
             id="app-drawer"
         >
             <DrawerHeader
                 title="React Todo"
             >
-                <Layout row justifyContent="between" alignItems="center">
+                <Grid className='sign-out'>
                     <Typography variant="body2">{state.user.email}</Typography>
                     <IconButton onClick={() => actions.signOutUser()} title="Wylogować się">
                         <Icon>exit_to_app</Icon>
                     </IconButton>
-                </Layout>
+                </Grid>
             </DrawerHeader>
 
             <DrawerContent>
@@ -120,8 +124,10 @@ export default function AppDrawer({ lists, list }) {
                             </form>
                             :
                             <Button
-                                icon={<Icon>add</Icon>}
+                                style={{ color: indigo[500] }}
+                                startIcon={<Icon>add</Icon>}
                                 onClick={() => setListFormOpen(true)}
+                                fullWidth
                             >Dodaj listę</Button>
                         }
                     </Grid>

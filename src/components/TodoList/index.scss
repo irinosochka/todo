@@ -3,4 +3,9 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  .todo-list-item{
+    .mdc-list-item__graphic{
+      display: inline-flex;
+    }
+  }
 }

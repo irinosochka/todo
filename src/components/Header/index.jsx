@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {TopAppBar} from "mdc-react";
+import indigo from '@material-ui/core/colors/indigo';
 import{
-    Menu,MenuItem, Fade, Icon, IconButton
+    Menu,MenuItem, Fade, Icon, IconButton,  AppBar, Toolbar, Typography
 } from '@material-ui/core'
+
+import './index.scss'
 
 export default function Header({  title, sortBy, onSortChange }) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -18,14 +20,17 @@ export default function Header({  title, sortBy, onSortChange }) {
 
     return (
         <div>
-            <TopAppBar
-                title={title}
-                actionItems={[
-                    <IconButton aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
-                        <Icon>sort</Icon>
+            <AppBar position="static">
+                <Toolbar justify="space-between">
+                    <Typography variant="h6">
+                        {title}
+                    </Typography>
+                    <IconButton
+                        aria-controls="fade-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}>
+                        <Icon style={{ color: indigo[50] }}>sort</Icon>
                     </IconButton>
-                ]}
-            />
 
             <Menu
                 id="fade-menu"
@@ -40,6 +45,8 @@ export default function Header({  title, sortBy, onSortChange }) {
                 <MenuItem onClick={() => onSortChange('completed')} selected={sortBy === 'completed'}>Po wykonanych</MenuItem>
                 <MenuItem onClick={() => onSortChange('important')} selected={sortBy === 'important'}>Po ważnych</MenuItem>
             </Menu>
+                    </Toolbar>
+            </AppBar>
         </div>
     );
 }

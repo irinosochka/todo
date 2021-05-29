@@ -18,6 +18,7 @@ import Details from '../../components/Details';
 import './index.scss';
 
 export default function TodoPage({ match }) {
+
     const { state, actions } = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
     const [sortBy, setSortBy] = useState('');
@@ -72,7 +73,6 @@ export default function TodoPage({ match }) {
 
     const sortedTodos = sortBy ? todos.slice().sort(sortFn[sortBy]) : todos;
 
-
     if (!list || !state.todos) return <LinearProgress />;
 
     return (
@@ -87,7 +87,6 @@ export default function TodoPage({ match }) {
                 <SideSheet
                     open={selectedTodo}
                     dismissible
-                    //appContentSelector=".mdc-side-sheet-app-content"
                 >
                     <Grid container spacing={1}>
                         <Typography>Szczegówy zadania</Typography>

@@ -1,7 +1,7 @@
 import React from 'react';
-import {
+import{
     List
-} from 'mdc-react';
+} from '@material-ui/core'
 
 import TodoListItem from '../TodoListItem';
 
