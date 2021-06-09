@@ -45,15 +45,12 @@ export default function Details({ todo, onUpdate }) {
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
+                            type="date"
                             format="dd/MM/yyyy"
                             margin="normal"
-                            id="date-picker-inline"
                             label="Wybierz datę wykonania"
                             value={selectedDate}
                             onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
                         />
                     </Grid>
                 </MuiPickersUtilsProvider>

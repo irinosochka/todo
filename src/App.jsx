@@ -30,22 +30,22 @@ export default function App() {
         );
     } else {
         return (
-                <div className="app">
-                    <AppDrawer
-                        lists={state.lists}
-                    />
+            <div className="app">
+                <AppDrawer
+                    lists={state.lists}
+                />
 
-                    <AppContent>
-                        <Switch>
-                            <Route exact path="/" component={TodoPage} />
-                            <Route exact path="/important" component={TodoPage} />
-                            <Route exact path="/planned" component={TodoPage} />
-                            <Route exact path="/done" component={TodoPage} />
-                            <Route exact path="/not_done" component={TodoPage} />
-                            <Route path="/:listId/:todoId?" component={TodoPage} />
-                        </Switch>
-                    </AppContent>
-                </div>
+                <AppContent>
+                    <Switch>
+                        <Route exact path="/" component={TodoPage} />
+                        <Route exact path="/important" component={TodoPage} />
+                        <Route exact path="/planned" component={TodoPage} />
+                        <Route exact path="/done" component={TodoPage} />
+                        <Route exact path="/not_done" component={TodoPage} />
+                        <Route path="/:listId/:todoId?" component={TodoPage} />
+                    </Switch>
+                </AppContent>
+            </div>
         );
     }
 }

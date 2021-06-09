@@ -22,14 +22,14 @@ export default function LoginPage() {
     function handleLogInButtonClick() {
         if (email && password) {
             actions.logInUser(email, password)
-                .catch(error => setError(error.message));
+                .catch(error => alert("Nieprawidłowy adres e-mail lub hasło"));
         }
     }
 
     function handleRegisterButtonClick() {
         if (email && password) {
             actions.registerUser(email, password)
-                .catch(error => setError(error.message));
+                .catch(error => alert("Wprowadź poprawny adres e-mail"));
         }
     }
 
